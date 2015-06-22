@@ -438,6 +438,76 @@ button.ui-btn-icon-notext,
 }
 
 
+.ui-field-contain,
+.ui-mobile fieldset.ui-field-contain {
+	display: block;
+	position: relative;
+	overflow: visible;
+	clear: both;
+	padding: .8em 0;
+}
+.ui-field-contain > label ~ [class*="ui-"],
+.ui-field-contain .ui-controlgroup-controls {
+	margin: 0;
+}
+.ui-field-contain:last-child {
+	border-bottom-width: 0;
+}
+@media (min-width: 28em) {
+	.ui-field-contain,
+	.ui-mobile fieldset.ui-field-contain {
+		padding: 0;
+		margin: 1em 0;
+		border-bottom-width: 0;
+	}
+	.ui-field-contain:before,
+	.ui-field-contain:after {
+		content: "";
+		display: table;
+	}
+	.ui-field-contain:after {
+		clear: both;
+	}
+	.ui-field-contain > label,
+	.ui-field-contain .ui-controlgroup-label,
+	.ui-field-contain > .ui-rangeslider > label {
+		float: left;
+		width: 20%;
+		margin: .5em 2% 0 0;
+	}
+	.ui-popup .ui-field-contain > label,
+	.ui-popup .ui-field-contain .ui-controlgroup-label,
+	.ui-popup .ui-field-contain > .ui-rangeslider > label {
+		float: none;
+		width: auto;
+		margin: 0 0 .4em;
+	}
+	.ui-field-contain > label ~ [class*="ui-"],
+	.ui-field-contain .ui-controlgroup-controls {
+		float: left;
+		width: 78%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	/* ui-hide-label deprecated in 1.4. TODO: Remove in 1.5 */
+	.ui-hide-label > label ~ [class*="ui-"],
+	.ui-hide-label .ui-controlgroup-controls,
+	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
+	.ui-popup .ui-field-contain .ui-controlgroup-controls {
+		float: none;
+		width: 100%;
+	}
+	.ui-field-contain > label ~ .ui-btn-inline {
+		width: auto;
+		margin-right: .625em;
+	}
+	.ui-field-contain > label ~ .ui-btn-inline.ui-btn-icon-notext {
+		width: 1.75em;
+	}
+}
+
+
 /* content configurations. */
 .ui-grid-a,
 .ui-grid-b,
@@ -719,121 +789,6 @@ li.ui-block-e {
 	transform: translateX(0);
 	animation-name: slideinfromleft;
 }
-
-/* The properties in this rule are only necessary for the 'flip' transition.
- * We need specify the perspective to create a projection matrix. This will add
- * some depth as the element flips. The depth number represents the distance of
- * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
- * value.
- */
-
-.viewport-turn {
-	-webkit-perspective: 200px;
-	-moz-perspective: 200px;
-	-ms-perspective: 200px;
-	perspective: 200px;
-	position: absolute;
-}
-.turn {
-	-webkit-backface-visibility: hidden;
-	-webkit-transform: translateX(0); /* Needed to work around an iOS 3.1 bug that causes listview thumbs to disappear when -webkit-visibility:hidden is used. */
-	-webkit-transform-origin: 0;
-	
-	-moz-backface-visibility: hidden;
-	-moz-transform: translateX(0);
-	-moz-transform-origin: 0;
-	
-	backface-visibility :hidden;
-	transform: translateX(0);
-	transform-origin: 0;
-}
-
-.turn.out {
-	-webkit-transform: rotateY(-90deg) scale(.9);
-	-webkit-animation-name: flipouttoleft;
-	-webkit-animation-duration: 125ms;
-	-moz-transform: rotateY(-90deg) scale(.9);
-	-moz-animation-name: flipouttoleft;
-	-moz-animation-duration: 125ms;
-	transform: rotateY(-90deg) scale(.9);
-	animation-name: flipouttoleft;
-	animation-duration: 125ms;
-}
-
-.turn.in {
-	-webkit-animation-name: flipintoright;
-	-webkit-animation-duration: 250ms;
-	-moz-animation-name: flipintoright;
-	-moz-animation-duration: 250ms;
-	animation-name: flipintoright;
-	animation-duration: 250ms;
-	
-}
-
-.turn.out.reverse {
-	-webkit-transform: rotateY(90deg) scale(.9);
-	-webkit-animation-name: flipouttoright;
-	-moz-transform: rotateY(90deg) scale(.9);
-	-moz-animation-name: flipouttoright;
-	transform: rotateY(90deg) scale(.9);
-	animation-name: flipouttoright;
-}
-
-.turn.in.reverse {
-	-webkit-animation-name: flipintoleft;
-	-moz-animation-name: flipintoleft;
-	animation-name: flipintoleft;
-}
-
-@-webkit-keyframes flipouttoleft {
-    from { -webkit-transform: rotateY(0); }
-    to { -webkit-transform: rotateY(-90deg) scale(.9); }
-}
-@-moz-keyframes flipouttoleft {
-    from { -moz-transform: rotateY(0); }
-    to { -moz-transform: rotateY(-90deg) scale(.9); }
-}
-@keyframes flipouttoleft {
-    from { transform: rotateY(0); }
-    to { transform: rotateY(-90deg) scale(.9); }
-}
-@-webkit-keyframes flipouttoright {
-    from { -webkit-transform: rotateY(0) ; }
-    to { -webkit-transform: rotateY(90deg) scale(.9); }
-}
-@-moz-keyframes flipouttoright {
-    from { -moz-transform: rotateY(0); }
-    to { -moz-transform: rotateY(90deg) scale(.9); }
-}
-@keyframes flipouttoright {
-    from { transform: rotateY(0); }
-    to { transform: rotateY(90deg) scale(.9); }
-}
-@-webkit-keyframes flipintoleft {
-    from { -webkit-transform: rotateY(-90deg) scale(.9); }
-    to { -webkit-transform: rotateY(0); }
-}
-@-moz-keyframes flipintoleft {
-    from { -moz-transform: rotateY(-90deg) scale(.9); }
-    to { -moz-transform: rotateY(0); }
-}
-@keyframes flipintoleft {
-    from { transform: rotateY(-90deg) scale(.9); }
-    to { transform: rotateY(0); }
-}
-@-webkit-keyframes flipintoright {
-    from { -webkit-transform: rotateY(90deg) scale(.9); }
-    to { -webkit-transform: rotateY(0); }
-}
-@-moz-keyframes flipintoright {
-    from { -moz-transform: rotateY(90deg) scale(.9); }
-    to { -moz-transform: rotateY(0); }
-}
-@keyframes flipintoright {
-    from { transform: rotateY(90deg) scale(.9); }
-    to { transform: rotateY(0); }
-}
-
 
 .ui-collapsible {
 	margin: 0 -1em;
@@ -2172,6 +2127,337 @@ ol.ui-listview > li img:first-child + * ~ * {
 }
 
 
+.ui-navbar {
+	max-width: 100%;
+}
+.ui-navbar ul:before,
+.ui-navbar ul:after {
+	content: "";
+	display: table;
+}
+.ui-navbar ul:after {
+	clear: both;
+}
+.ui-navbar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	display: block;
+	border: 0;
+	max-width: 100%;
+	overflow: visible;
+}
+.ui-navbar li .ui-btn {
+	font-size: 12.5px;
+	display: block;
+	margin: 0;
+	border-right-width: 0;
+}
+.ui-header .ui-navbar li button.ui-btn,
+.ui-footer .ui-navbar li button.ui-btn {
+	margin: 0;
+	width: 100%;
+}
+.ui-navbar .ui-btn:focus {
+	z-index: 1;
+}
+
+/* fixes gaps caused by subpixel problem */
+.ui-navbar li:last-child .ui-btn {
+	margin-right: -4px;
+}
+.ui-navbar li:last-child .ui-btn:after {
+	margin-right: 4px;
+}
+
+.ui-content .ui-navbar li:last-child .ui-btn,
+.ui-content .ui-navbar .ui-grid-duo .ui-block-b .ui-btn {
+	border-right-width: 1px;
+	margin-right: 0;
+}
+.ui-content .ui-navbar li:last-child .ui-btn:after,
+.ui-content .ui-navbar .ui-grid-duo .ui-block-b .ui-btn:after {
+	margin-right: 0;
+}
+.ui-navbar .ui-grid-duo .ui-block-a:last-child .ui-btn {
+	border-right-width: 1px;
+	margin-right: -1px;
+}
+.ui-navbar .ui-grid-duo .ui-block-a:last-child .ui-btn:after {
+	margin-right: 1px;
+}
+
+.ui-navbar .ui-grid-duo .ui-btn {
+	border-top-width: 0;
+}
+.ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
+	border-top-width: 1px;
+}
+.ui-header .ui-navbar .ui-btn,
+.ui-footer .ui-navbar .ui-btn {
+	border-top-width: 0;
+	border-bottom-width: 0;
+}
+.ui-header .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-footer .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-header .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn,
+.ui-footer .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
+	border-top-width: 0;
+}
+.ui-header .ui-title ~ .ui-navbar .ui-btn,
+.ui-footer .ui-title ~ .ui-navbar .ui-btn,
+.ui-header .ui-navbar .ui-grid-duo .ui-btn,
+.ui-footer .ui-navbar .ui-grid-duo .ui-btn,
+.ui-header .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-footer .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-header .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn,
+.ui-footer .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
+	border-top-width: 1px;
+}
+
+
+/* Panel */
+.ui-panel {
+	width: 17em;
+	min-height: 100%;
+	max-height: none;
+	border-width: 0;
+	position: absolute;
+	top: 0;
+	display: block;
+}
+.ui-panel-closed {
+	width: 0;
+	max-height: 100%;
+	overflow: hidden;
+	visibility: hidden;
+	left: 0;
+	clip: rect(1px,1px,1px,1px);
+}
+.ui-panel-fixed {
+	position: fixed;
+	bottom: -1px; /* Fixes gap on Chrome for Android */
+	padding-bottom: 1px;
+}
+.ui-panel-display-reveal {
+	z-index: 1;
+}
+.ui-panel-display-push {
+	z-index: 999;
+}
+.ui-panel-display-overlay {
+	z-index: 1001; /* Fixed toolbars have z-index 1000 */
+}
+.ui-panel-inner {
+	padding: 1em;
+}
+
+/* Container, page and wrapper */
+.ui-panel-page-container {
+	overflow-x: visible;
+}
+.ui-panel-page-container-themed .ui-page-active {
+	background: none;
+}
+.ui-panel-wrapper {
+	position: relative;
+	min-height: inherit;
+	border: 0;
+	overflow-x: hidden;
+	z-index: 999;
+}
+
+/* Fixed toolbars */
+.ui-panel-fixed-toolbar {
+	overflow-x: hidden;
+}
+
+/* Dismiss */
+.ui-panel-dismiss {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	z-index: 1002;
+	display: none;
+}
+.ui-panel-dismiss-open {
+	display: block;
+}
+
+/* Animate class is added to panel, wrapper and fixed toolbars */
+.ui-panel-animate {
+	-webkit-transition: -webkit-transform 300ms ease;
+	-webkit-transition-duration: 300ms;
+	-moz-transition: -moz-transform 300ms ease;
+	transition: transform 300ms ease;
+}
+
+/* Fix for Windows Phone issue #6349: unset the transition for transforms in case of fixed toolbars. */
+@media screen and ( max-device-width: 768px ) {
+	.ui-page-header-fixed .ui-panel-animate.ui-panel-wrapper,
+	.ui-page-footer-fixed .ui-panel-animate.ui-panel-wrapper,
+	.ui-panel-animate.ui-panel-fixed-toolbar {
+		-ms-transition: none;
+	}
+	/* We need a transitionend event ... */
+	.ui-panel-animate.ui-panel-fixed-toolbar {
+		-ms-transition: -ms-transform 1ms;
+		-ms-transform: rotate(0deg);
+	}
+}
+
+/* Hardware acceleration for smoother transitions on WebKit browsers */
+.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) {
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+/* Panel positioning (for overlay and push) */
+/* Panel left closed */
+.ui-panel-position-left {
+	left: -17em;
+}
+/* Panel left closed animated */
+.ui-panel-animate.ui-panel-position-left.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-position-left.ui-panel-display-push {
+	left: 0;
+	-webkit-transform: translate3d(-17em,0,0);
+	-moz-transform: translate3d(-17em,0,0);
+	transform: translate3d(-17em,0,0);
+}
+/* Panel left open */
+.ui-panel-position-left.ui-panel-display-reveal, /* Unset "panel left closed" for reveal */
+.ui-panel-open.ui-panel-position-left {
+	left: 0;
+}
+/* Panel left open animated */
+.ui-panel-animate.ui-panel-open.ui-panel-position-left.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-open.ui-panel-position-left.ui-panel-display-push {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-moz-transform: none;
+}
+/* Panel right closed */
+.ui-panel-position-right {
+	right: -17em;
+}
+/* Panel right closed animated */
+.ui-panel-animate.ui-panel-position-right.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-position-right.ui-panel-display-push {
+	right: 0;
+	-webkit-transform: translate3d(17em,0,0);
+	-moz-transform: translate3d(17em,0,0);
+	transform: translate3d(17em,0,0);
+}
+/* Panel right open */
+.ui-panel-position-right.ui-panel-display-reveal, /* Unset "panel right closed" for reveal */
+.ui-panel-position-right.ui-panel-open {
+	right: 0;
+}
+/* Panel right open animated */
+.ui-panel-animate.ui-panel-open.ui-panel-position-right.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-open.ui-panel-position-right.ui-panel-display-push {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-moz-transform: none;
+}
+
+/* Wrapper and fixed toolbars positioning (for reveal and push) */
+/* Panel left open */
+.ui-panel-page-content-position-left {
+	left: 17em;
+	right: -17em;
+}
+/* Panel left open animated */
+.ui-panel-animate.ui-panel-page-content-position-left {
+	left: 0;
+	right: 0;
+	-webkit-transform: translate3d(17em,0,0);
+	-moz-transform: translate3d(17em,0,0);
+	transform: translate3d(17em,0,0);
+}
+/* Panel right open */
+.ui-panel-page-content-position-right {
+	left: -17em;
+	right: 17em;
+}
+/* Panel right open animated */
+.ui-panel-animate.ui-panel-page-content-position-right {
+	left: 0;
+	right: 0;
+	-webkit-transform: translate3d(-17em,0,0);
+	-moz-transform: translate3d(-17em,0,0);
+	transform: translate3d(-17em,0,0);
+}
+
+/* Dismiss model open */
+.ui-panel-dismiss-open.ui-panel-dismiss-position-left {
+	left: 17em;
+}
+.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
+	right: 17em;
+}
+
+/* Shadows and borders */
+.ui-panel-display-reveal {
+	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
+	-moz-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
+	box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
+}
+.ui-panel-position-right.ui-panel-display-reveal {
+	-webkit-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
+	-moz-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
+	box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
+}
+.ui-panel-display-overlay {
+	-webkit-box-shadow: 5px 0 5px rgba(0,0,0,.15);
+	-moz-box-shadow: 5px 0 5px rgba(0,0,0,.15);
+	box-shadow: 5px 0 5px rgba(0,0,0,.15);
+}
+.ui-panel-position-right.ui-panel-display-overlay {
+	-webkit-box-shadow: -5px 0 5px rgba(0,0,0,.15);
+	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.15);
+	box-shadow: -5px 0 5px rgba(0,0,0,.15);
+}
+.ui-panel-open.ui-panel-position-left.ui-panel-display-push {
+	border-right-width: 1px;
+	margin-right: -1px;
+}
+.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
+	margin-left: 1px;
+	width: auto;
+}
+.ui-panel-open.ui-panel-position-right.ui-panel-display-push {
+	border-left-width: 1px;
+	margin-left: -1px;
+}
+.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
+	margin-right: 1px;
+	width: auto;
+}
+
+/* Responsive: wrap on wide viewports once open */
+@media (min-width:55em) {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left {
+		margin-right: 17em;
+	}
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right {
+		margin-left: 17em;
+	}
+	.ui-responsive-panel .ui-panel-page-content-open {
+		width: auto;	
+	}
+	.ui-responsive-panel .ui-panel-dismiss-display-push,
+	.ui-responsive-panel.ui-page-active ~ .ui-panel-dismiss-display-push {
+		display: none;
+	}
+}
+
+
 .ui-popup-open .ui-header-fixed,
 .ui-popup-open .ui-footer-fixed {
 	position: absolute !important; /* See issues #4816, #4844 and #4874 and popup.js */
@@ -2351,6 +2637,179 @@ ol.ui-listview > li img:first-child + * ~ * {
 }
 
 
+/* Dimensions related to the popup arrow
+-----------------------------------------------------------------------------------------------------------*/
+/* desired triangle height: 10px */
+
+/**
+ * guide for the arrow - its width, height, and offset are theme-dependent and
+ * should be expessed as left, right, top, bottom, so that the element bearing
+ * such a class becomes stretched inside its parent position: relative element.
+ * The left/top/right/bottom specified below should reflect the corresponding
+ * border radii and so it leaves room for the shadow:
+ *     ..--------------------..
+ *   ."        ^ top           ".
+ *  /          v                 \
+ * |     +------------------+     |
+ * |     |                  |     |
+ * | left|                  |right|
+ * |<--->|                  |<--->|
+ * |     +------------------+     |
+ *  \          ^                 /
+ *   `.        v bottom        .'
+ *     ""--------------------""
+ * The idea is that the top/left of the arrow container box does not move to a
+ * coordinate smaller than the top/left of the guide and the right/bottom of
+ * the arrow container box does not move to a coordinate larger than the
+ * bottom/right of the guide. This will help us avoid the following situation:
+ *        ..--------------------..
+ *      ."        ^ top           ".
+ *   /|/          v                 \
+ *  / |     +------------------+     |
+ *  \ |     |                  |     |
+ *   \| left|                  |right|
+ *    |<--->|                  |<--->|
+ *    |     +------------------+     |
+ *     \          ^                 /
+ *      `.        v bottom        .'
+ *        ""--------------------""
+ * The arrow should not receive a top/left coordinate such that it is too close
+ * to one of the corners, because then at first the shadow of the arrow and,
+ * given a coordinate even closer to the corner, even the body of the arrow will
+ * "stick out" of the corner of the popup. The guide provides a hint to the
+ * arrow positioning code as to which range of values is acceptable for the
+ * arrow container's top/left coordinate.
+ **/
+
+.ui-popup-arrow-container {
+	width: 20px;
+	height: 20px;
+}
+
+/* aside from the "infinities" (-1000,2000), triangle height is used */
+.ui-popup-arrow-container.ui-popup-arrow-l {
+	left: -10px;
+	clip: rect(-1000px,10px,2000px,-1000px);
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-t {
+	top: -10px;
+	clip: rect(-1000px,2000px,10px,-1000px);
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-r {
+	right: -10px;
+	clip: rect(-1000px,2000px,2000px,10px);
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-b {
+	bottom: -10px;
+	clip: rect(10px,2000px,1000px,-1000px);
+}
+
+/**
+ * For each side, the arrow is twice the desired size and its corner is aligned
+ * with the edge of the container:
+ *                                           
+ *           /\         /\                +----+       /\
+ *          /  \       /  \               | /\ |top   /  \
+ *      +----+  \     /  +----+       +-->|/  \|     /    \
+ *  left| /  |   \   /   |  \ |right  |   |    |    /      \
+ *      |/   |    \ /    |   \|       |  /|    |\  /        \
+ *      |\   |    / \    |   /|       | / +----+ \ \ +----+ /
+ *      | \  |   /   \   |  / |       | \        /  \|    |/
+ *      +----+  /     \  +----+       |  \      /    |    |
+ *       ^  \  /       \  /  ^        |   \    /  +->|\  /|
+ *       |   \/         \/   |        |    \  /   |  | \/ |bottom
+ *       |                   |        |     \/    |  +----+
+ *       +-------------------+--------+-----------+
+ *                           |
+ *                    arrow container
+ *                     (clips arrow)
+ **/
+
+.ui-popup-arrow-container .ui-popup-arrow {
+	/* (4*desired triangle height)/sqrt(2) - does not account for border - centred within the outer rectangle */
+	width: 28.284271247px;
+	height: 28.284271247px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow {
+	left: -4.142135623px;
+	top: 5.857864376px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow {
+	left: -4.142135623px;
+	top: -14.142135623px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow {
+	left: 5.857864376px;
+	top: -4.142135623px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow {
+	left: -14.142135623px;
+	top: -4.142135623px;
+}
+
+/* Fix rotation center for oldIE - see http://www.useragentman.com/IETransformsTranslator/ */
+.ui-popup-arrow-container.ui-popup-arrow-t.ie .ui-popup-arrow {
+    margin-left: -5.857864376269049px;
+    margin-top: -7.0710678118654755px;
+}
+.ui-popup-arrow-container.ui-popup-arrow-b.ie .ui-popup-arrow {
+    margin-left: -5.857864376269049px;
+    margin-top: -4.142135623730951px;
+}
+ 
+.ui-popup-arrow-container.ui-popup-arrow-l.ie .ui-popup-arrow {
+    margin-left: -7.0710678118654755px;
+    margin-top: -5.857864376269049px;
+}
+.ui-popup-arrow-container.ui-popup-arrow-r.ie .ui-popup-arrow {
+    margin-left: -4.142135623730951px;
+    margin-top: -5.857864376269049px;
+}
+
+/* structure */
+.ui-popup > .ui-popup-arrow-guide {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	visibility: hidden;
+}
+
+.ui-popup-arrow-container {
+	position: absolute;
+}
+
+.ui-popup-arrow {
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.ui-popup-arrow-container.ie .ui-popup-arrow {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
+	filter: progid:DXImageTransform.Microsoft.Matrix(
+	      	M11=0.7071067811865474,
+        	M12=-0.7071067811865477,
+        	M21=0.7071067811865477,
+        	M22=0.7071067811865474,
+        	SizingMethod='auto expand');
+}
+
+
 .ui-table {
 	border: 0;
 	border-collapse: collapse;
@@ -2472,4 +2931,87 @@ ol.ui-listview > li img:first-child + * ~ * {
 .ui-table-columntoggle.ui-responsive th.ui-table-cell-visible,
 .ui-table-columntoggle.ui-responsive td.ui-table-cell-visible {
 	display: table-cell;
+}
+
+
+/*
+ Styles for the table columntoggle mode
+*/
+.ui-table-reflow td .ui-table-cell-label,
+.ui-table-reflow th .ui-table-cell-label { 
+	display: none;
+}
+
+/* Mobile first styles: Begin with the stacked presentation at narrow widths */ 
+@media only all {
+	/* Hide the table headers */ 
+	.ui-table-reflow thead td, 
+	.ui-table-reflow thead th {
+		display: none;
+	}
+	/* Show the table cells as a block level element */ 
+	.ui-table-reflow td,
+	.ui-table-reflow th { 
+		text-align: left;
+		display: block;
+	}
+	/* Add a fair amount of top margin to visually separate each row when stacked */  
+	.ui-table-reflow tbody th {
+		margin-top: 3em;
+	}
+	/* Make the label elements a percentage width */ 
+	.ui-table-reflow td .ui-table-cell-label,
+	.ui-table-reflow th .ui-table-cell-label { 
+		padding: .4em; 
+		min-width: 30%; 
+		display: inline-block;
+		margin: -.4em 1em -.4em -.4em;
+	}
+	/* For grouped headers, have a different style to visually separate the levels by classing the first label in each col group */ 
+	.ui-table-reflow th .ui-table-cell-label-top,
+	.ui-table-reflow td .ui-table-cell-label-top {
+		display: block;
+		padding: .4em 0;
+		margin: .4em 0;
+		text-transform: uppercase;
+		font-size: .9em;
+		font-weight: normal;
+	}
+}
+
+
+/* Breakpoint to show as a standard table at 560px (35em x 16px) or wider */ 
+@media ( min-width: 35em ) {
+
+	/* Show the table header rows */ 
+	.ui-table-reflow.ui-responsive td,
+	.ui-table-reflow.ui-responsive th,
+	.ui-table-reflow.ui-responsive tbody th,
+	.ui-table-reflow.ui-responsive tbody td,
+	.ui-table-reflow.ui-responsive thead td,
+	.ui-table-reflow.ui-responsive thead th {
+		display: table-cell;
+		margin: 0;
+	}
+
+	/* Hide the labels in each cell */ 
+	.ui-table-reflow.ui-responsive td .ui-table-cell-label,
+	.ui-table-reflow.ui-responsive th .ui-table-cell-label { 
+		display: none;
+	}
+}
+
+
+/* Hack to make IE9 and WP7.5 treat cells like block level elements, scoped to ui-responsive class */ 
+/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this*/ 
+@media ( max-width: 35em ) {
+	.ui-table-reflow.ui-responsive td,
+	.ui-table-reflow.ui-responsive th {
+		width: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		float: left;
+		clear: left;
+	}
 }
