@@ -109,6 +109,18 @@
 			});            
         });
 		
+		$(function ()
+		{
+			if (window.sessionStorage.UserLogin)
+			{
+				$(".ui-icon-power").text(window.sessionStorage.UserLogin);
+			}
+			else
+			{
+				$(".ui-icon-power").text('Log In');
+			}
+		});
+		
 		function Mensage( texto )
 		{
 			new Messi(texto, 
@@ -124,7 +136,37 @@
 			switch (x)
 			{
 				case 0:
-					window.location = "#page-LogIn";
+					if (!window.sessionStorage.UserLogin)
+						window.location = "#page-LogIn";
+					else
+					{
+						new Messi('&iquest;Desea Cerrar Sesi&oacute;n?', 
+						{
+							title: 'Shopp App', 
+							width: (window.innerWidth - 25),
+							buttons: 
+								[
+									{
+										id: 0, 
+										label: 'Si', 
+										val: 'Y'
+									}, 
+									{
+										id: 1, 
+										label: 'No', 
+										val: 'N'
+									}
+								], 
+							callback: function(val) 
+							{ 
+								if (val == 'Y')
+								{
+									window.sessionStorage.removeItem("UserLogin");
+									window.location = "index.html";
+								}
+							}
+						});
+					}
 					break;
 				case 1:
 					window.location = "#hogar-sala";
@@ -146,8 +188,6 @@
 			$("#VItemImage").attr('src',urlImage );
 			$("#VIPrice").text(price);
 			$("#VIDesc").text(desc);
-			
-			
 		}
 	
 	</script>
@@ -275,7 +315,7 @@
             </ul>
         </div>
         
-        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed" data-id="oneFooter">
+        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed">
             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
             <ul style="width:100%">
                 <li style="width:50%"><a href="#" id="back" data-icon="custom" data-rel="back">Atras</a></li>
@@ -319,7 +359,7 @@
             </div>
         </div>
         
-        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed" data-id="oneFooter">
+        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed" >
             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
             <ul style="width:100%">
                 <li style="width:50%"><a href="#" id="back" data-icon="custom" data-rel="back">Atras</a></li>
