@@ -129,7 +129,25 @@
 				case 1:
 					window.location = "#hogar-sala";
 					break;
+				case 3:
+					window.location = "#view-itemPagina";
+					$("#VItemTitle").text('Hola');
+					$("#VItemImage").attr('src','img/DB/Sala/photo2.jpg' );
+					$("#VIPrice").text('Q 333');
+					$("#VIDesc").text('Hola');
+					break;
 			}
+		}
+		
+		function viewItemPagina( title, price, desc, urlImage )
+		{
+			window.location = "#view-itemPagina";
+			$("#VItemTitle").text(title);
+			$("#VItemImage").attr('src',urlImage );
+			$("#VIPrice").text(price);
+			$("#VIDesc").text(desc);
+			
+			
 		}
 	
 	</script>
@@ -201,7 +219,7 @@
 
     </div>
     
-    <!-- view content -->
+    <!-- view list content -->
     <div id="hogar-sala" data-role="page" data-theme="d" class="backGroundApp">
     	
         <div data-role="header" data-position="fixed">
@@ -212,35 +230,93 @@
         
         <div data-role="content">
         	<ul data-role="listview">
-            	<li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+            	<li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t1HS').text(), 'Q 5,000', $('#d1HS').text(), 'img/DB/Sala/6580 Coach Twilight.jpg');">
                 	<img src="img/DB/Sala/6580 Coach Twilight.jpg" class="imagAppList"/>
-                    <p>Sofa Cama Color nego</p>
+                    <h4 id="t1HS">Sofa Negro</h4>
+                    <p id="d1HS">Sofa Cama Color nego</p>
                 </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t2HS').text(), 'Q 8,000', $('#d2HS').text(), 'img/DB/Sala/photo2.jpg');">
                 	<img src="img/DB/Sala/photo2.jpg" class="imagAppList"/>
-                    <p>Sofa Color blanco Crema, Estilizado, Madrea de alta calidad</p>
+                    <h4 id="t2HS">Sofa Blanco Channel</h4>
+                    <p id="d2HS">Sofa Color blanco Crema, Estilizado, Madrea de alta calidad</p>
                 </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t3HS').text(), 'Q 20,000', $('#d3HS').text(), 'img/DB/Sala/photo3.jpg');">
                 	<img src="img/DB/Sala/photo3.jpg" class="imagAppList"/>
-                    <p>Set de 3, con estilos moderno en color azul</p>
+                    <h4 id="t3HS">NICE SOFA&reg; Sofa Azul</h4>
+                    <p id="d3HS">Set de 3, con estilos moderno en color azul</p>
                 </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t4HS').text(), 'Q 3,500', $('#d4HS').text(), 'img/DB/Sala/photo4.jpg');">
                 	<img src="img/DB/Sala/photo4.jpg" class="imagAppList"/>
-                    <p>Mesa de te (centro) de vidrio y aluminio, con estilo moderno</p>
+                    <h4 id="t4HS">Mesa de Te (Vidrio aluminio)</h4>
+                    <p id="d4HS">Mesa de te (centro) de vidrio y aluminio, con estilo moderno</p>
                 </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t5HS').text(), 'Q 10,800.50', $('#d5HS').text(), 'img/DB/Sala/460307414_321.jpg');">
                 	<img src="img/DB/Sala/460307414_321.jpg" class="imagAppList"/>
-                    <p>Juego de 3 mesas para sala, de color negro, estilo minimalista</p>
+                    <h4 id="t5HS">Modern T Furniture&reg; Juego de 3 Mesas</h4>
+                    <p id="d5HS">Juego de 3 mesas para sala, de color negro, estilo minimalista</p>
                 </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t6HS').text(), 'Q 2,000', $('#d6HS').text(), 'img/DB/Sala/445004202_084.jpg');">
                 	<img src="img/DB/Sala/445004202_084.jpg" class="imagAppList"/>
-                    <p>Mesa de Centro, estilo minimalista, de madra de cedro</p>
+                    <h4 id="t6HS">Mesa de Te (Minimalista)</h4>
+                    <p id="d6HS">Mesa de Centro, estilo minimalista, de marmol</p>
                 </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">
+                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
+                	onClick="viewItemPagina($('#t7HS').text(), 'Q 230', $('#d7HS').text(), 'img/DB/Sala/photo5.jpg');">
                 	<img src="img/DB/Sala/photo5.jpg" class="imagAppList"/>
-                    <p>Maceta echa con cuedas naturales.</p>
+                    <h4 id="t7HS">Macetero Ecolocigo</h4>
+                    <p id="d7HS">Maceta hecha con cuedas naturales.</p>
                 </li>
             </ul>
+        </div>
+        
+        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed" data-id="oneFooter">
+            <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+            <ul style="width:100%">
+                <li style="width:50%"><a href="#" id="back" data-icon="custom" data-rel="back">Atras</a></li>
+                <li style="width:50%"><a href="#" id="home" data-icon="custom">Home</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+
+	<div id="view-itemPagina" data-role="page" data-theme="d" class="backGroundApp">
+    	
+        <div data-role="header" data-position="fixed">
+        	<button class="ui-btn ui-shadow ui-corner-all ui-icon-carreta ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-left">0</button>
+            <button class="ui-btn ui-shadow ui-corner-all ui-icon-power ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-right" onClick="Redirect(0);">Log In</button>
+            <h1 style="color:#FFFFFF" id="VItemTitle"></h1>
+        </div>
+        
+        <div data-role="content">
+        	<div style="width:50%" class="left">
+            <img id="VItemImage" style="width:100%; height:100%; border-radius:20px" />
+            </div>
+            <div class="right" style="width:50%" >
+            	<table data-role="table" data-mode="reflow" class="ui-responsive table-stroke" 
+                style="background-color:rgba(255, 255, 255, 0.40); border-radius:20px">
+                    <thead>
+                        <tr>
+                            <th data-priority="persist" colspan="2">Informacion del Producto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Precio</th>
+                            <td><label id="VIPrice"></label></td>
+                        </tr>
+                        <tr>
+                            <th>Descripcion</th>
+                            <td><label id="VIDesc"></label></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         
         <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed" data-id="oneFooter">
