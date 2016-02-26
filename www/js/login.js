@@ -4,61 +4,97 @@ function ValEntrada ()
 	var UName = $("#tbUserName").val();
 	var UPwd  = $("#tbUserPassWord").val();
 	
+	UName = UName.toUpperCase();
+	
 	var NCerrarS = $("#cbSesionPermanete").is(":checked");
 	
 	if (UName == "" || UPwd == "")
-	new Messi('Todos los campos son requeridos.', 
-				{
-					title: 'Shop App', 
-					titleClass: 'anim error', 
-					buttons: 
-						[
-							{
-								id: 0, 
-								label: 'Cerrar', 
-								val: 'X'
-							}
-						],
-					modal: true,
-					width: (window.innerWidth - 25)
-				});
+	{
+		var txtMsg = $("#Texto1").text();
+		new Messi(txtMsg, 
+					{
+						title: 'Volcafe', 
+						titleClass: 'anim error', 
+						buttons: 
+							[
+								{
+									id: 0, 
+									label: 'Cerrar', 
+									val: 'X'
+								}
+							],
+						modal: true,
+						width: (window.innerWidth - 25)
+					});
+	}
 	else
 	{
 		$("#loadingAJAX").show();
 		
 		$(document).delay(1000);
 		
-		if (UName == "daguila" || UPwd == "123")
+		$.get("http://200.30.150.165:8080/webservidor/index.php",
 		{
-			window.sessionStorage.UserLogin = UName;
+			"leer"	: "16",
+			"uuid"	: UPwd,
+			"asesor": UName
+		},
+		function (data)
+		{
+			xml = StringToXML(data);
+			root = xml.documentElement;
 			
-			var Mensage = 'Hola. ' + UName;
-				
-				new Messi(Mensage, 
-				{
-					title: 'Shop App', 
-					titleClass: 'success', 
-					buttons: 
-						[
-							{
-								id: 0, 
-								label: 'Close', 
-								val: 'X'
-							}
-						],
-					modal: true,
-					width: (window.innerWidth - 25),
-					callback: function (info)
+			if ($(root).find("EMPRESA").text() == "")
+			{
+				var txtMsg = $("#tErrorLogin").text();
+				new Messi(txtMsg, 
 					{
-						window.location="index.html";
-					}
-				});
-		}
-		else
+						title: 'Volcafe', 
+						titleClass: 'anim error', 
+						buttons: 
+							[
+								{
+									id: 0, 
+									label: 'Cerrar', 
+									val: 'X'
+								}
+							],
+						modal: true,
+						width: (window.innerWidth - 25)
+					});
+			}
+			else
+			{
+				window.sessionStorage.UserLogin = UName;
+				var txtMsg = $("#tLogIn").text();
+				new Messi(txtMsg, 
+					{
+						title: 'Volcafe', 
+						titleClass: 'anim success', 
+						buttons: 
+							[
+								{
+									id: 0, 
+									label: 'Cerrar', 
+									val: 'X'
+								}
+							],
+						modal: true,
+						width: (window.innerWidth - 25),
+						callback: function (val)
+						{
+							window.location = "#page-home"
+						}
+					});
+			}
+			
+		},"text")
+		.fail(function ()
 		{
-			new Messi('Error al Iniciar Sesi&oacute;n...', 
+			var txtMsg = $("#tNoInternet").text();
+			new Messi(txtMsg, 
 				{
-					title: 'Shop App', 
+					title: 'Volcafe', 
 					titleClass: 'anim error', 
 					buttons: 
 						[
@@ -71,8 +107,7 @@ function ValEntrada ()
 					modal: true,
 					width: (window.innerWidth - 25)
 				});
-		}
-		
+		});
 		$("#loadingAJAX").hide();
 
 	}

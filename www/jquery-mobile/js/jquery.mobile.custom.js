@@ -6968,6 +6968,14 @@ $.mobile.links = function( target ) {
 })( jQuery );
 
 
+(function( $, undefined ) {
+
+$.mobile.nojs = function( target ) {
+	$( ":jqmData(role='nojs')", target ).addClass( "ui-nojs" );
+};
+
+})( jQuery );
+
 (function( $ ) {
 	var	meta = $( "meta[name=viewport]" ),
 		initialContent = meta.attr( "content" ),
@@ -7002,6 +7010,79 @@ $.mobile.links = function( target ) {
 
 }( jQuery ));
 
+(function( $, window ) {
+
+	$.mobile.iosorientationfixEnabled = true;
+
+	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
+	var ua = navigator.userAgent,
+		zoom,
+		evt, x, y, z, aig;
+	if ( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ) {
+		$.mobile.iosorientationfixEnabled = false;
+		return;
+	}
+
+	zoom = $.mobile.zoom;
+
+	function checkTilt( e ) {
+		evt = e.originalEvent;
+		aig = evt.accelerationIncludingGravity;
+
+		x = Math.abs( aig.x );
+		y = Math.abs( aig.y );
+		z = Math.abs( aig.z );
+
+		// If portrait orientation and in one of the danger zones
+		if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
+				if ( zoom.enabled ) {
+					zoom.disable();
+				}
+		}	else if ( !zoom.enabled ) {
+				zoom.enable();
+		}
+	}
+
+	$.mobile.document.on( "mobileinit", function() {
+		if ( $.mobile.iosorientationfixEnabled ) {
+			$.mobile.window
+				.bind( "orientationchange.iosorientationfix", zoom.enable )
+				.bind( "devicemotion.iosorientationfix", checkTilt );
+		}
+	});
+
+}( jQuery, this ));
+
+/*
+* fallback transition for flip in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+$.mobile.transitionFallbacks.flip = "fade";
+
+})( jQuery, this );
+
+/*
+* fallback transition for flow in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+$.mobile.transitionFallbacks.flow = "fade";
+
+})( jQuery, this );
+
+/*
+* fallback transition for pop in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+$.mobile.transitionFallbacks.pop = "fade";
+
+})( jQuery, this );
+
 /*
 * fallback transition for slide in non-3D supporting browsers (which tend to handle complex transitions poorly in general
 */
@@ -7015,6 +7096,48 @@ $.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
 $.mobile.transitionFallbacks.slide = "fade";
 
 })( jQuery, this );
+
+/*
+* fallback transition for slidedown in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+$.mobile.transitionFallbacks.slidedown = "fade";
+
+})( jQuery, this );
+
+/*
+* fallback transition for slidefade in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+// Set the slide transitions's fallback to "fade"
+$.mobile.transitionFallbacks.slidefade = "fade";
+
+})( jQuery, this );
+
+/*
+* fallback transition for slideup in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+$.mobile.transitionFallbacks.slideup = "fade";
+
+})( jQuery, this );
+
+/*
+* fallback transition for turn in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+*/
+
+(function( $, window, undefined ) {
+
+$.mobile.transitionFallbacks.turn = "fade";
+
+})( jQuery, this );
+
 
 (function( $, undefined ) {
 
@@ -13112,63 +13235,6 @@ $.widget( "mobile.slider", $.mobile.slider, {
 			}
 			this._popup.hide();
 			this._popupVisible = false;
-		}
-	}
-});
-
-})( jQuery );
-
-(function( $, undefined ) {
-
-function defaultAutodividersSelector( elt ) {
-	// look for the text in the given element
-	var text = $.trim( elt.text() ) || null;
-
-	if ( !text ) {
-		return null;
-	}
-
-	// create the text for the divider (first uppercased letter)
-	text = text.slice( 0, 1 ).toUpperCase();
-
-	return text;
-}
-
-$.widget( "mobile.listview", $.mobile.listview, {
-	options: {
-		autodividers: false,
-		autodividersSelector: defaultAutodividersSelector
-	},
-
-	_beforeListviewRefresh: function() {
-		if ( this.options.autodividers ) {
-			this._replaceDividers();
-			this._superApply( arguments );
-		}
-	},
-
-	_replaceDividers: function() {
-		var i, lis, li, dividerText,
-			lastDividerText = null,
-			list = this.element,
-			divider;
-
-		list.children( "li:jqmData(role='list-divider')" ).remove();
-
-		lis = list.children( "li" );
-
-		for ( i = 0; i < lis.length ; i++ ) {
-			li = lis[ i ];
-			dividerText = this.options.autodividersSelector( $( li ) );
-
-			if ( dividerText && lastDividerText !== dividerText ) {
-				divider = document.createElement( "li" );
-				divider.appendChild( document.createTextNode( dividerText ) );
-				divider.setAttribute( "data-" + $.mobile.ns + "role", "list-divider" );
-				li.parentNode.insertBefore( divider, li );
-			}
-
-			lastDividerText = dividerText;
 		}
 	}
 });

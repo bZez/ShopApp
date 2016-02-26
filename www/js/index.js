@@ -1,49 +1,84 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+var db;
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+$(document).ready(function(e) 
+{
+	db = window.openDatabase("PromotorDirectoryDB","1.0", "LocalVolcafeDB", 2 * 1024 * 1024);      
+});
 
-        console.log('Received Event: ' + id);
-    }
-};
+
+
+function Mensage( texto )
+{
+	/*$("#loadingAJAX").show();
+	$("#ajaxgif").hide();*/
+	new Messi(texto, 
+	{
+		title: 'Volcafe', 
+		width: (window.innerWidth - 25),
+		callback: function(val)
+		{
+			alert(val);
+			$("#loadingAJAX").hide();
+			$("#ajaxgif").show();
+		}
+	});
+}
+
+function Redirect ( x )
+{
+	switch (x)
+	{
+		case 0:
+			if (!window.sessionStorage.UserLogin)
+				window.location = "#page-LogIn";
+			else
+			{
+				new Messi('&iquest;Desea Cerrar Sesi&oacute;n?', 
+				{
+					title: 'Shopp App', 
+					width: (window.innerWidth - 25),
+					buttons: 
+						[
+							{
+								id: 0, 
+								label: 'Si', 
+								val: 'Y'
+							}, 
+							{
+								id: 1, 
+								label: 'No', 
+								val: 'N'
+							}
+						], 
+					callback: function(val) 
+					{ 
+						if (val == 'Y')
+						{
+							window.sessionStorage.removeItem("UserLogin");
+							window.location = "index.html";
+						}
+					}
+				});
+			}
+			break;
+		case 1:
+			window.location = "#hogar-sala";
+			break;
+		case 3:
+			window.location = "#view-itemPagina";
+			$("#VItemTitle").text('Hola');
+			$("#VItemImage").attr('src','img/DB/Sala/photo2.jpg' );
+			$("#VIPrice").text('Q 333');
+			$("#VIDesc").text('Hola');
+			break;
+	}
+}
+
+function viewItemPagina( title, price, desc, urlImage )
+{
+	window.location = "#view-itemPagina";
+	$("#VItemTitle").text(title);
+	$("#VItemImage").attr('src',urlImage );
+	$("#VIPrice").text(price);
+	$("#VIDesc").text(desc);
+}

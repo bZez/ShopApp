@@ -2,196 +2,27 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Shop App</title>
+    <title>Volcafe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     
     
     <link rel="stylesheet" href="jquery-mobile/styles/jquery.mobile.custom.structure.min.css" />
     <link rel="stylesheet" href="jquery-mobile/styles/jquery.mobile.custom.theme.min.css" />
-    <link rel="stylesheet" href="themes/TecdoTheme.min.css" />
+    <link rel="stylesheet" href="themes/Volcafe.min.css" />
 	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
     <link href="styles/main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="jquery-mobile/styles/css-banner/swiper.min.css" />
     <link rel="stylesheet" href="jquery-mobile/styles/messi.min.css" />
+    <link rel="stylesheet" href="css/index.css"/>
     
     <script src="jquery-mobile/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/i18n/jquery.i18n.min.js" type="text/javascript"></script>
+    <script src="js/en-us.js" type="text/javascript"></script>
     <script src="jquery-mobile/js/jquery.mobile.custom.min.js" type="text/javascript"></script>
-    <script src="jquery-mobile/js/js-banner/swiper.jquery.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/js/messi.min.js" type="text/javascript"></script>
-    <script src="js/login.js" type="text/javascript"></script>
+    <script src="js/xml-converter.js" type="text/javascript"></script>
+    <script src="js/index.js" type="text/javascript"></script>
+   	<script src="js/login.js" type="text/javascript"></script>
 
-    <style>
-		.backGroundApp 
-		{
-			background: rgb(169,219,125); /* Old browsers */
-			background: -moz-radial-gradient(center, ellipse cover,  rgba(169,219,125,1) 0%, rgba(104,196,39,1) 71%, rgba(90,160,33,1) 100%); /* FF3.6+ */
-			background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(169,219,125,1)), color-stop(71%,rgba(104,196,39,1)), color-stop(100%,rgba(90,160,33,1))); /* Chrome,Safari4+ */
-			background: -webkit-radial-gradient(center, ellipse cover,  rgba(169,219,125,1) 0%,rgba(104,196,39,1) 71%,rgba(90,160,33,1) 100%); /* Chrome10+,Safari5.1+ */
-			background: -o-radial-gradient(center, ellipse cover,  rgba(169,219,125,1) 0%,rgba(104,196,39,1) 71%,rgba(90,160,33,1) 100%); /* Opera 12+ */
-			background: -ms-radial-gradient(center, ellipse cover,  rgba(169,219,125,1) 0%,rgba(104,196,39,1) 71%,rgba(90,160,33,1) 100%); /* IE10+ */
-			background: radial-gradient(ellipse at center,  rgba(169,219,125,1) 0%,rgba(104,196,39,1) 71%,rgba(90,160,33,1) 100%); /* W3C */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db7d', endColorstr='#5aa021',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-		}
-		.swiper-container {
-			width: 100%;
-			height: 300px;
-			
-		}
-		.swiper-slide {
-			text-align: center;
-			font-size: 18px;
-			background: #fff;
-			
-			/* Center slide text vertically */
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: -webkit-flex;
-			display: flex;
-			-webkit-box-pack: center;
-			-ms-flex-pack: center;
-			-webkit-justify-content: center;
-			justify-content: center;
-			-webkit-box-align: center;
-			-ms-flex-align: center;
-			-webkit-align-items: center;
-			align-items: center;
-		}
-		.ui-icon-carreta:after {
-			background-image:url(img/promo.png);
-			background-repeat:no-repeat;
-			background-size:cover;
-			width:23px;
-			height:23px;
-			box-shadow: none;
-			-webkit-box-shadow: none;
-		}
-		.ajaxDiv{
-			vertical-align:middle;
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			z-index: 100;
-			background-color:rgba(0, 0, 0, 0.65);
-			filter: alpha(opacity=40);
-			width: 132px;
-		}
-		.nav-glyphish-example .ui-btn { padding-top: 40px !important; }
-		.nav-glyphish-example .ui-btn:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
-		#back:after { background:  url(img/back.png) 50% 50% no-repeat; background-size: 24px 22px; }
-		#home:after { background:  url(jquery-mobile/styles/images/icons-png/home-black.png) 50% 50% no-repeat; background-size: 24px 16px;  }
-		
-		.imagAppList
-		{
-			width:80%; 
-			height:80%; 
-			margin-top:10px; 
-			margin-left:5px; 
-			border-radius:5px;
-		}
-    </style>
-    
-	<script type="text/javascript">
-	
-		$(document).ready(function(e) 
-		{
-			var MySwiper = $(".swiper-container").swiper(
-			{
-				mode:'horizontal',
-				loop: true,
-				pagination: '.swiper-pagination',
-				paginationClickable: '.swiper-pagination',
-				nextButton: '.swiper-button-next',
-				prevButton: '.swiper-button-prev',
-				spaceBetween: 30,
-				//effect: 'fade',
-				autoplay: 5000,
-        		autoplayDisableOnInteraction: false
-			});            
-        });
-		
-		$(function ()
-		{
-			if (window.sessionStorage.UserLogin)
-			{
-				$(".ui-icon-power").text(window.sessionStorage.UserLogin);
-			}
-			else
-			{
-				$(".ui-icon-power").text('Log In');
-			}
-		});
-		
-		function Mensage( texto )
-		{
-			new Messi(texto, 
-			{
-				title: 'Shop App', 
-				
-				width: (window.innerWidth - 25)
-			});
-		}
-		
-		function Redirect ( x )
-		{
-			switch (x)
-			{
-				case 0:
-					if (!window.sessionStorage.UserLogin)
-						window.location = "#page-LogIn";
-					else
-					{
-						new Messi('&iquest;Desea Cerrar Sesi&oacute;n?', 
-						{
-							title: 'Shopp App', 
-							width: (window.innerWidth - 25),
-							buttons: 
-								[
-									{
-										id: 0, 
-										label: 'Si', 
-										val: 'Y'
-									}, 
-									{
-										id: 1, 
-										label: 'No', 
-										val: 'N'
-									}
-								], 
-							callback: function(val) 
-							{ 
-								if (val == 'Y')
-								{
-									window.sessionStorage.removeItem("UserLogin");
-									window.location = "index.html";
-								}
-							}
-						});
-					}
-					break;
-				case 1:
-					window.location = "#hogar-sala";
-					break;
-				case 3:
-					window.location = "#view-itemPagina";
-					$("#VItemTitle").text('Hola');
-					$("#VItemImage").attr('src','img/DB/Sala/photo2.jpg' );
-					$("#VIPrice").text('Q 333');
-					$("#VIDesc").text('Hola');
-					break;
-			}
-		}
-		
-		function viewItemPagina( title, price, desc, urlImage )
-		{
-			window.location = "#view-itemPagina";
-			$("#VItemTitle").text(title);
-			$("#VItemImage").attr('src',urlImage );
-			$("#VIPrice").text(price);
-			$("#VIDesc").text(desc);
-		}
-	
-	</script>
-    
 </head>
 <body>
 
@@ -205,194 +36,59 @@
         />
     </div>
     <!--Home-->
-    <div id="page-home" data-role="page" data-theme="d" class="backGroundApp" >
+    <div id="page-home" data-role="page" data-theme="a" >
 
         <!--Header-->
         <div data-role="header" data-position="fixed">
-        	<button class="ui-btn ui-shadow ui-corner-all ui-icon-carreta ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-left">0</button>
-            <button class="ui-btn ui-shadow ui-corner-all ui-icon-power ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-right" onClick="Redirect(0);">Log In</button>
-            <h1 style="color:#FFFFFF">Shop App</h1>
+        	<button class="ui-btn ui-shadow ui-corner-all ui-icon-enLogo ui-btn-icon-notext" id="btnTraslate">English</button>
+            <a class="ui-btn ui-shadow ui-corner-all ui-icon-power ui-btn-icon-left ui-btn-a ui-btn-inline ui-btn-right" data-transition="flip" href="#LogInDialog">Iniciar</a>
+            <h1>Volcafe App</h1>
         </div>
 
         <!--Content-->
         <div data-role="content">
-        	<center><h2 style="color:#FFFFFF">Promociones</h2></center>
-            <div class="swiper-container" style="margin-top:5px;">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="img/32113_steins_gate.jpg" style="width:inherit; height:100%" /></div>
-                    <div class="swiper-slide"><img src="img/Slider1_organizacion.jpg"  style="width:inherit; height:100%"/></div>
-                    <div class="swiper-slide"><img src="img/Slider3_EspecialPapa.jpg"  style="width:inherit; height:100%"/></div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <!-- Add Arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-            <h4 style="color:#FFFFFF">Departamentos</h4>
-            <div data-role="collapsible-set" data-mini="true">
-            	<div data-role="collapsible" class="ui-nodisc-icon ui-alt-icon">
-                    <h4>Hogar</h4>
-                    <ul data-role="listview">
-                    	<li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" onClick="Redirect(1);">Sala</li>
-                        <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" onClick="Messi.alert('Comedor');">Comedor</li>
-                        <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" onClick="Messi.alert('Cosina');">Cosina</li>
-                        <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" onClick="Messi.alert('Dormitorio');">Dormitorio</li>
-                        <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" onClick="Mensage('Ba&ntilde;o');">Ba&ntilde;o</li>
-                    </ul>
-                </div>
-                <div data-role="collapsible" class="ui-nodisc-icon ui-alt-icon">
-                    <h4>Herramientas</h4>
-                    <ul data-role="listview">
-                    	<li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">Jardin</li>
-                        <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline">Trabajo</li>
-                    </ul>
-                </div>
-            </div>
+        	<center><h2 style="color:#FFFFFF">Metodo Volcafe</h2></center>
+            
+            <h4 style="color:#FFFFFF" id="tInicio">Visi&oacute;n:</h4>
+            <table style="width:100%; height:auto">
+            	<tr>
+                	<td style="width:50%">
+                        <p id="pTextInfo">
+                        Una filosofia global y holistica que respalda la estrategia de negocios de Volcafe, 
+                        agrega valor a la cadena comercial y 
+                        genera una mayor prosperidad en la calidad de vida 
+                        de los productores que suplen nuestro cafe.
+                        </p>
+            		</td>
+                    <td style="width:50%">
+                    	<img src="img/inicio.gif" style="width:100%; height:auto"/>
+                    </td>
+                </tr>
+            </table>
+            
         </div>
        
 
         <!--Footer-->
-        <div data-role="footer" data-position="fixed" data-id="oneFooter">
-            <span class="footerText"><span id="logout-username"></span></span>
-        </div>
 
     </div>
     
-    <!-- view list content -->
-    <div id="hogar-sala" data-role="page" data-theme="d" class="backGroundApp">
-    	
-        <div data-role="header" data-position="fixed">
-        	<button class="ui-btn ui-shadow ui-corner-all ui-icon-carreta ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-left">0</button>
-            <button class="ui-btn ui-shadow ui-corner-all ui-icon-power ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-right" onClick="Redirect(0);">Log In</button>
-            <h1 style="color:#FFFFFF">Departamento Hogar-Sala</h1>
+    <div id="LogInDialog" data-role="page" data-theme="a" data-dialog="true" data-close-btn="right">
+    	<div data-role="header">
+        	<h1>Iniciar Sesion</h1>
         </div>
         
         <div data-role="content">
-        	<ul data-role="listview">
-            	<li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t1HS').text(), 'Q 5,000', $('#d1HS').text(), 'img/DB/Sala/6580 Coach Twilight.jpg');">
-                	<img src="img/DB/Sala/6580 Coach Twilight.jpg" class="imagAppList"/>
-                    <h4 id="t1HS">Sofa Negro</h4>
-                    <p id="d1HS">Sofa Cama Color nego</p>
-                </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t2HS').text(), 'Q 8,000', $('#d2HS').text(), 'img/DB/Sala/photo2.jpg');">
-                	<img src="img/DB/Sala/photo2.jpg" class="imagAppList"/>
-                    <h4 id="t2HS">Sofa Blanco Channel</h4>
-                    <p id="d2HS">Sofa Color blanco Crema, Estilizado, Madrea de alta calidad</p>
-                </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t3HS').text(), 'Q 20,000', $('#d3HS').text(), 'img/DB/Sala/photo3.jpg');">
-                	<img src="img/DB/Sala/photo3.jpg" class="imagAppList"/>
-                    <h4 id="t3HS">NICE SOFA&reg; Sofa Azul</h4>
-                    <p id="d3HS">Set de 3, con estilos moderno en color azul</p>
-                </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t4HS').text(), 'Q 3,500', $('#d4HS').text(), 'img/DB/Sala/photo4.jpg');">
-                	<img src="img/DB/Sala/photo4.jpg" class="imagAppList"/>
-                    <h4 id="t4HS">Mesa de Te (Vidrio aluminio)</h4>
-                    <p id="d4HS">Mesa de te (centro) de vidrio y aluminio, con estilo moderno</p>
-                </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t5HS').text(), 'Q 10,800.50', $('#d5HS').text(), 'img/DB/Sala/460307414_321.jpg');">
-                	<img src="img/DB/Sala/460307414_321.jpg" class="imagAppList"/>
-                    <h4 id="t5HS">Modern T Furniture&reg; Juego de 3 Mesas</h4>
-                    <p id="d5HS">Juego de 3 mesas para sala, de color negro, estilo minimalista</p>
-                </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t6HS').text(), 'Q 2,000', $('#d6HS').text(), 'img/DB/Sala/445004202_084.jpg');">
-                	<img src="img/DB/Sala/445004202_084.jpg" class="imagAppList"/>
-                    <h4 id="t6HS">Mesa de Te (Minimalista)</h4>
-                    <p id="d6HS">Mesa de Centro, estilo minimalista, de marmol</p>
-                </li>
-                <li class="ui-shadow ui-corner-all ui-icon-carat-r ui-btn-icon-right ui-btn-d ui-btn-inline" 
-                	onClick="viewItemPagina($('#t7HS').text(), 'Q 230', $('#d7HS').text(), 'img/DB/Sala/photo5.jpg');">
-                	<img src="img/DB/Sala/photo5.jpg" class="imagAppList"/>
-                    <h4 id="t7HS">Macetero Ecolocigo</h4>
-                    <p id="d7HS">Maceta hecha con cuedas naturales.</p>
-                </li>
-            </ul>
-        </div>
-        
-        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed">
-            <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
-            <ul style="width:100%">
-                <li style="width:50%"><a id="back" data-icon="custom" data-rel="back">Atras</a></li>
-                <li style="width:50%"><a href="index.html" id="home" data-icon="custom">Home</a></li>
-            </ul>
-            </div>
-        </div>
-    </div>
-
-	<div id="view-itemPagina" data-role="page" data-theme="d" class="backGroundApp">
-    	
-        <div data-role="header" data-position="fixed">
-        	<button class="ui-btn ui-shadow ui-corner-all ui-icon-carreta ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-left">0</button>
-            <button class="ui-btn ui-shadow ui-corner-all ui-icon-power ui-btn-icon-left ui-btn-d ui-btn-inline ui-btn-right" onClick="Redirect(0);">Log In</button>
-            <h1 style="color:#FFFFFF" id="VItemTitle"></h1>
-        </div>
-        
-        <div data-role="content">
-        	<div style="width:50%" class="left">
-            <img id="VItemImage" style="width:100%; height:100%; border-radius:20px" />
-            </div>
-            <div class="right" style="width:50%" >
-            	<table data-role="table" data-mode="reflow" class="ui-responsive table-stroke" 
-                style="background-color:rgba(255, 255, 255, 0.40); border-radius:20px">
-                    <thead>
-                        <tr>
-                            <th data-priority="persist" colspan="2">Informacion del Producto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Precio</th>
-                            <td><label id="VIPrice"></label></td>
-                        </tr>
-                        <tr>
-                            <th>Descripcion</th>
-                            <td><label id="VIDesc"></label></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <div data-role="footer" class="nav-glyphish-example" data-theme="d" data-position="fixed" >
-            <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
-            <ul style="width:100%">
-                <li style="width:50%"><a id="back" data-icon="custom" data-rel="back">Atras</a></li>
-                <li style="width:50%"><a href="index.html" id="home" data-icon="custom">Home</a></li>
-            </ul>
-            </div>
-        </div>
-    </div>
-
-    <!--UI interaction-->
-    <div id="page-LogIn" data-role="page" data-theme="d" class="backGroundApp">
-
-        <!--Header-->
-        <div data-role="header" data-position="fixed">
-            <h1>Login</h1>
-        </div>
-
-        <!--Content-->
-        <div data-role="content">
-            <form name="fLogIn" id="fLogIn">
-                <input type="text" id="tbUserName" name="tbUserName" placeholder="Usuario" required autocomplete="off"/>
-                <input type="password" id="tbUserPassWord" name="tbUserPassWord" placeholder="Contrase&ntilde;a" required/>
-                <input type="button"  value="Iniciar Sesi&oacute;n" onClick="ValEntrada();"/>
+        	<form name="fLogIn" id="fLogIn">
+            	<label>Usuario</label>
+                <input type="text" id="tbUserName" name="tbUserName" required autocomplete="off"/>
+                <label>Contrase&ntilde;a</label>
+                <input type="password" id="tbUserPassWord" name="tbUserPassWord" required/>
+                <input type="button"  value="Aceptar" onClick="ValEntrada();"/>
             </form>
         </div>
-
-        <!--Footer-->
-        <div data-role="footer" data-position="fixed" data-id="oneFooter">
-            <span class="footerText">Shop App</span>
-        </div>
-
     </div>
-
+    
     <!--Location-->
     <div id="page-location" data-role="page" data-add-back-btn="true">
 
@@ -420,6 +116,11 @@
 
     </div>
 
+	<label id="Texto1">Todos los campos Requeridos</label>
+    <label id="tErrorLogin">Error... Usuario y Contra&ntilde;a incorrectos</label>
+    <label id="tLogIn">Bienvendo a la Aplicacion volcafe</label>
+    <label id="tNoInternet">Error... Sin Conneccion a Internet</label>
+
 	<script type="text/javascript">
      
      $("#loadingAJAX").width(window.innerWidth);
@@ -430,7 +131,15 @@
             top: ((window.innerHeight / 2) - 80),
             left: ((window.innerWidth / 2) - 40) 
         });
+		
+	var listaOb = ["#Texto1", "#tErrorLogin", "#tLogIn", "#tNoInternet"];
+		
      $("#loadingAJAX").hide();
+	 
+	 $.each(listaOb, function (index, val )
+	 {
+		 $(val).hide();
+	 });
     </script>
 </body>
 </html>

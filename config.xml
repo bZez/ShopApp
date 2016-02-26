@@ -1,7 +1,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.tecdogt.shopapp" version="1.0.0">
-  <name>Shop App</name>
-  <description>App Demo Online Shopping</description>
-  <author href="http://www.tecdogt.com" email="info@tecdogt.com">Tecnologia y Domotica de Guatemala S.A</author>
+  <name>Vway</name>
+  <description>Aplicacion para visitas a l Exterior</description>
+  <author href="" email="gs@ls-sys.com">Logic Soft</author>
   <content src="index.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="default"/>
